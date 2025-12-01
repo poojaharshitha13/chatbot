@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>SimpleBot Chat</title>
+</head>
+<body>
+  <h2>SimpleBot</h2>
+  <div id="chat"></div>
+  <input id="msg"/><button onclick="send()">Send</button>
+<script>
+const base='http://localhost:8080/api';
+async function send(){
+  let t=document.getElementById('msg').value;
+  let r=await fetch(base+'/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:t})});
+  let d=await r.json();
+  document.getElementById('chat').innerHTML+=`You: ${t}<br>Bot: ${d.text}<br>`;
+}
+</script>
+</body>
+</html>
