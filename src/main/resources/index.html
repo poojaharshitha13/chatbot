@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chatbot</title>
+</head>
+<body>
+    <h2>My Chatbot</h2>
+
+    <input type="text" id="msg" placeholder="Type your message">
+    <button onclick="send()">Send</button>
+
+    <p id="reply"></p>
+
+    <script>
+        function send() {
+            let message = document.getElementById("msg").value;
+
+            fetch("/chat?message=" + message)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("reply").innerText = data;
+                });
+        }
+    </script>
+</body>
+</html>
